@@ -102,7 +102,7 @@
             const data = Object.fromEntries(formData.entries());
 
             // API URL
-            const API_URL = "http://localhost:8000/predict/";
+            const API_URL = "https://crop-rec-lxjs.onrender.com/predict/";
 
             // Send POST request to the API
             fetch(API_URL, {
@@ -110,7 +110,15 @@
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify({
+                    N: Number(data.N),
+                    P: Number(data.P),
+                    K: Number(data.K),
+                    temperature: Number(data.temperature),
+                    humidity: Number(data.humidity),
+                    ph: Number(data.ph),
+                    rainfall: Number(data.rainfall)
+                })
             })
             .then(response => response.json())
             .then(result => {
